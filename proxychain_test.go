@@ -11,19 +11,19 @@ import (
 func TestGetClient(t *testing.T) {
 	proxyChain := []ProxyConfig{
 		{
-			address: "localhost:1080",
-			auth:    nil,
+			Address: "localhost:1080",
+			Auth:    nil,
 		},
 		{
-			address: "212.119.47.150:1080",
-			auth: &proxy.Auth{
+			Address: "212.119.47.150:1080",
+			Auth: &proxy.Auth{
 				User:     "myLogin",
 				Password: "myPassword",
 			},
 		},
 		{
-			address: "212.119.47.229:1085",
-			auth:    nil,
+			Address: "212.119.47.229:1085",
+			Auth:    nil,
 		},
 	}
 	req, _ := http.NewRequest(http.MethodGet, "https://api.ipify.org/", nil)

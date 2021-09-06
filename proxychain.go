@@ -8,8 +8,8 @@ import (
 )
 
 type ProxyConfig struct {
-	address string
-	auth    *proxy.Auth
+	Address string
+	Auth    *proxy.Auth
 }
 
 func GetClient(chain []ProxyConfig) *http.Client {
@@ -31,10 +31,10 @@ func getTransport(chain []ProxyConfig) *http.Transport {
 // dialer1 -> dialer2 -> dialer... -> url
 func getProxyDialer(chain []ProxyConfig) (dialer proxy.Dialer) {
 	firstProxy := chain[0]
-	dialer, _ = proxy.SOCKS5("tcp", firstProxy.address, firstProxy.auth, proxy.Direct)
+	dialer, _ = proxy.SOCKS5("tcp", firstProxy.Address, firstProxy.Auth, proxy.Direct)
 	for i := 1; i < len(chain); i++ {
 		chainProxy := chain[i]
-		dialer, _ = proxy.SOCKS5("tcp", chainProxy.address, chainProxy.auth, dialer)
+		dialer, _ = proxy.SOCKS5("tcp", chainProxy.Address, chainProxy.Auth, dialer)
 	}
 	return
 }
